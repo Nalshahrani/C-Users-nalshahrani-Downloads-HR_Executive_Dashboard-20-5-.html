@@ -1248,6 +1248,9 @@ function openPopup(title, rows, colorClass) {
         + '<div class="kpi-pop-num">' + (i+1) + '</div>'
         + '<div class="kpi-pop-info">'
         + '<div class="kpi-pop-title">' + r.title + '</div>'
+        + (r.name && r.name !== 'Vacant' && r.name !== 'nan' && r.name !== ''
+            ? '<div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:2px;">👤 ' + r.name + '</div>'
+            : '')
         + '<div class="kpi-pop-dept">' + r.dept + '</div>'
         + '<div class="kpi-pop-tags">'
         + clusterTag(r.cluster)
