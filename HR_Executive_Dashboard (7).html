@@ -631,8 +631,8 @@ const cbCls  = p => p>=70?'cb-hi':p>=50?'cb-mid':'cb-lo';
 
 // ── CALC ─────────────────────────────────────────────────────────
 function calc(rows) {
-  const t=rows.filter(r=>r.status!=='Removed'&&r.status!=='Additional').length, c=rows.filter(r=>r.status==='Current/Osool').length,
-    v=rows.filter(r=>r.status==='Vacant').length, ho=rows.filter(r=>r.status==='Hold').length,
+  const t=rows.filter(r=>r.status!=='Hold'&&r.status!=='Removed'&&r.status!=='Additional').length, c=rows.filter(r=>r.status==='Current/Osool').length,
+    v=rows.filter(r=>r.status==='Vacant'||r.status==='Acting').length, ho=rows.filter(r=>r.status==='Hold').length,
     uh=rows.filter(r=>r.status==='Under Hiring').length, h=rows.filter(r=>r.status==='Hired').length,
     p1=rows.filter(r=>r.priority==='1 (Immediate)').length,
     p2=rows.filter(r=>r.priority==='2 (Q1)').length,
@@ -640,7 +640,7 @@ function calc(rows) {
     pb=rows.filter(r=>!r.priority).length,
     p1uh=rows.filter(r=>r.status==='Under Hiring'&&r.priority==='1 (Immediate)').length,
     p1v=rows.filter(r=>r.priority==='1 (Immediate)'&&r.status==='Vacant').length,
-    filled=c+h, comp=t>0?+(filled/t*100).toFixed(1):0, vacp=t>0?+(v/t*100).toFixed(1):0;
+    filled=rows.filter(r=>r.status==='Current/Osool'||r.status==='Hired'||r.status==='Acting').length, comp=t>0?+(filled/t*100).toFixed(1):0, vacp=t>0?+(v/t*100).toFixed(1):0;
   return {t,c,v,ho,uh,h,p1,p2,p3,pb,p1uh,p1v,filled,comp,vacp};
 }
 
@@ -1276,8 +1276,8 @@ var _kpiDefs = {
   'k-total':    { title:'All Positions',    filter: function(r){ return r.status!=='Removed'&&r.status!=='Additional'; } },
   'c-filled':   { title:'Filled',           filter: function(r){ return r.status==='Current/Osool'||r.status==='Hired'; } },
   'k-filled':   { title:'Filled',           filter: function(r){ return r.status==='Current/Osool'||r.status==='Hired'; } },
-  'c-vacant':   { title:'Vacant Positions', filter: function(r){ return r.status==='Vacant'; } },
-  'k-vacant':   { title:'Vacant Positions', filter: function(r){ return r.status==='Vacant'; } },
+  'c-vacant':   { title:'Vacant Positions', filter: function(r){ return r.status==='Vacant'||r.status==='Acting'; } },
+  'k-vacant':   { title:'Vacant Positions', filter: function(r){ return r.status==='Vacant'||r.status==='Acting'; } },
   'c-hold':     { title:'On Hold',          filter: function(r){ return r.status==='Hold'; } },
   'k-hold':     { title:'On Hold',          filter: function(r){ return r.status==='Hold'; } },
   'c-pipeline': { title:'In Pipeline',      filter: function(r){ return r.status==='Under Hiring'; } },
