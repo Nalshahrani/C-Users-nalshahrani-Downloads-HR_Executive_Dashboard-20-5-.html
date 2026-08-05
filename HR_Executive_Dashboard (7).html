@@ -631,16 +631,16 @@ const cbCls  = p => p>=70?'cb-hi':p>=50?'cb-mid':'cb-lo';
 
 // ── CALC ─────────────────────────────────────────────────────────
 function calc(rows) {
-  const t=rows.filter(r=>r.status!=='Hold'&&r.status!=='Removed'&&r.status!=='Additional').length, c=rows.filter(r=>r.status==='Current/Osool').length,
-    v=rows.filter(r=>r.status==='Vacant'||r.status==='Acting').length, ho=rows.filter(r=>r.status==='Hold').length,
+  const t=rows.filter(function(r){return r.status!=='Hold'&&r.status!=='Removed'&&r.status!=='Additional';}).length, c=rows.filter(r=>r.status==='Current/Osool').length,
+    v=rows.filter(function(r){return r.status==='Vacant'||r.status==='Acting';}).length, ho=rows.filter(r=>r.status==='Hold').length,
     uh=rows.filter(r=>r.status==='Under Hiring').length, h=rows.filter(r=>r.status==='Hired').length,
     p1=rows.filter(r=>r.priority==='1 (Immediate)').length,
     p2=rows.filter(r=>r.priority==='2 (Q1)').length,
     p3=rows.filter(r=>r.priority==='3 (Q2)').length,
     pb=rows.filter(r=>!r.priority).length,
     p1uh=rows.filter(r=>r.status==='Under Hiring'&&r.priority==='1 (Immediate)').length,
-    p1v=rows.filter(r=>r.priority==='1 (Immediate)'&&r.status==='Vacant').length,
-    filled=rows.filter(r=>r.status==='Current/Osool'||r.status==='Hired'||r.status==='Acting').length, comp=t>0?+(filled/t*100).toFixed(1):0, vacp=t>0?+(v/t*100).toFixed(1):0;
+    p1v=rows.filter(r=>r.priority==='1 (Immediate)'&&(r.status==='Vacant'||r.status==='Acting')).length,
+    filled=rows.filter(function(r){return r.status==='Current/Osool'||r.status==='Hired';}).length, comp=t>0?+(filled/t*100).toFixed(1):0, vacp=t>0?+(v/t*100).toFixed(1):0;
   return {t,c,v,ho,uh,h,p1,p2,p3,pb,p1uh,p1v,filled,comp,vacp};
 }
 
@@ -741,7 +741,7 @@ function renderChief(rows){
       const dr=rows.filter(r=>r.dept===dept),t2=dr.length;
       const f=dr.filter(r=>r.status==='Current/Osool'||r.status==='Hired').length;
       const ho=dr.filter(r=>r.status==='Hold').length;
-      const v=dr.filter(r=>r.status==='Vacant').length;
+      const v=dr.filter(r=>r.status==='Vacant'||r.status==='Acting').length;
       const fp=+(f/t2*100).toFixed(0),hp=+(ho/t2*100).toFixed(0),vp=+(v/t2*100).toFixed(0);
       const comp2=+(f/t2*100).toFixed(1);
       const clr=cbCls(comp2);
@@ -910,11 +910,11 @@ function renderAnalytics(rows){
 
   // Hold vs Vacant bars
   const hvDepts=[...new Set(rows.map(r=>r.dept))].sort();
-  const maxHV=Math.max(...hvDepts.map(d=>{const dr=rows.filter(r=>r.dept===d);return Math.max(dr.filter(r=>r.status==='Vacant').length,dr.filter(r=>r.status==='Hold').length)}),1);
+  const maxHV=Math.max(...hvDepts.map(d=>{const dr=rows.filter(r=>r.dept===d);return Math.max(dr.filter(r=>r.status==='Vacant'||r.status==='Acting').length,dr.filter(r=>r.status==='Hold').length)}),1);
   const hvc=$('hold-vac-bars');
   if(hvc) hvc.innerHTML=hvDepts.map(d=>{
     const dr=rows.filter(r=>r.dept===d);
-    const v2=dr.filter(r=>r.status==='Vacant').length;
+    const v2=dr.filter(r=>r.status==='Vacant'||r.status==='Acting').length;
     const h2=dr.filter(r=>r.status==='Hold').length;
     return `<div class="bc-row">
       <div class="bc-label">${SH[d]||d}</div>
@@ -931,7 +931,7 @@ function renderAnalytics(rows){
     const dr=rows.filter(r=>r.dept===d),t2=dr.length;
     const f=dr.filter(r=>r.status==='Current/Osool'||r.status==='Hired').length;
     const ho2=dr.filter(r=>r.status==='Hold').length;
-    const v2=dr.filter(r=>r.status==='Vacant').length;
+    const v2=dr.filter(r=>r.status==='Vacant'||r.status==='Acting').length;
     const u2=dr.filter(r=>r.status==='Under Hiring').length;
     return `<div class="bc-row">
       <div class="bc-label">${SH[d]||d}</div>
