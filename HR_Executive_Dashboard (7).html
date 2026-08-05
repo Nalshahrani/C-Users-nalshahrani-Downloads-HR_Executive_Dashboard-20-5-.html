@@ -361,6 +361,105 @@ body.dark .cb.yellow{background:rgba(255,177,51,.15);color:#ffb133}
 body.dark .cb.red{background:rgba(255,107,107,.15);color:#ff6b6b}
 body.dark .badge-live{background:rgba(45,212,200,.15);border-color:rgba(45,212,200,.3);color:#2dd4c8}
 body.dark .badge-live i{background:#2dd4c8}
+
+/* ── MOBILE RESPONSIVE (max 600px) ──────────────────────────── */
+@media(max-width:600px){
+
+  /* Header */
+  header { padding:10px 14px; flex-wrap:wrap; gap:8px; }
+  .hdr-title { font-size:13px; }
+  .hdr-sub   { font-size:10px; }
+  .hdr-date  { font-size:10px; display:none; }
+  .badge-live { font-size:10px; padding:3px 8px; }
+  .dark-btn  { width:28px; height:28px; font-size:14px; }
+
+  /* Tabs */
+  .tab-bar { gap:0; overflow-x:auto; }
+  .tab     { font-size:11px; padding:10px 12px; white-space:nowrap; }
+  .tab-badge { font-size:10px; padding:1px 6px; }
+
+  /* Wrap padding */
+  .wrap, .chief-wrap { padding:12px; }
+
+  /* Greeting banner */
+  .greeting { padding:16px; border-radius:12px; }
+  .greeting h2 { font-size:18px; }
+  .g-stats { gap:14px; }
+  .gs-num  { font-size:26px; }
+  .gs-num-xl { font-size:36px !important; }
+
+  /* KPI cards — 1 column on mobile */
+  .kpi5, .kpi6 { grid-template-columns:1fr 1fr !important; gap:10px; }
+  .kc { padding:14px; }
+  .kc-val { font-size:28px; }
+  .kc-lbl { font-size:10px; }
+
+  /* Priority strip */
+  .chief-prow, .prow { grid-template-columns:1fr !important; gap:8px; }
+  .cpc, .pc { padding:12px 16px; }
+  .cpc-num, .pc-num { font-size:22px; }
+
+  /* Chief grid — stack vertically */
+  .chief-grid { grid-template-columns:1fr !important; gap:12px; }
+
+  /* Department overview chart */
+  .dbar-name { width:80px; font-size:10px; }
+  .dbar-track { height:16px; }
+
+  /* Department cards */
+  .dept-grid { grid-template-columns:1fr !important; }
+  .dc { padding:14px; }
+  .dc-name { font-size:13px; }
+
+  /* Cluster/analytics tables */
+  .ctbl, .ptbl { font-size:11px; }
+  .ctbl th, .ctbl td, .ptbl th, .ptbl td { padding:6px 8px; }
+
+  /* G2, G3 grids — stack */
+  .g2, .g3 { grid-template-columns:1fr !important; gap:12px; }
+  .twocol   { grid-template-columns:1fr !important; }
+
+  /* Analytics charts */
+  .donut-wrap { flex-direction:column; align-items:center; gap:12px; }
+  .hbrow { flex-wrap:wrap; gap:4px; }
+  .hblbl { width:auto !important; min-width:80px; }
+
+  /* Pipeline table */
+  .ptbl th:nth-child(3),
+  .ptbl td:nth-child(3),
+  .ptbl th:nth-child(4),
+  .ptbl td:nth-child(4) { display:none; }
+
+  /* Cluster table */
+  .ctbl th:nth-child(5),
+  .ctbl td:nth-child(5) { display:none; }
+
+  /* Cards */
+  .card { padding:14px; }
+  .card-title { font-size:13px; }
+
+  /* Flow cards */
+  .flow-stage { padding:12px 8px; }
+
+  /* P1 list */
+  .p1-item { padding:10px 12px; }
+  .p1-title { font-size:12px; }
+
+  /* Filters */
+  .fbar { flex-direction:column; gap:8px; padding:12px; }
+  .fbar select { width:100% !important; }
+
+  /* Section headers */
+  .sec { font-size:11px; margin:16px 0 10px; }
+
+  /* Analytics duration flow */
+  [id="flow-eval-camo"], [id="flow-camo-join"], [id="flow-full"] { font-size:28px !important; }
+}
+
+@media(max-width:400px){
+  .kpi5, .kpi6 { grid-template-columns:1fr !important; }
+  .kc-val { font-size:24px; }
+}
 </style>
 </head>
 <body>
