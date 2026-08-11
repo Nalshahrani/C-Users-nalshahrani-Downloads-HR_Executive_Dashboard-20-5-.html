@@ -1367,9 +1367,12 @@ function openPopup(title, rows, colorClass) {
       return '<div class="kpi-pop-item">'
         + '<div class="kpi-pop-num">' + (i+1) + '</div>'
         + '<div class="kpi-pop-info">'
-        + '<div class="kpi-pop-title">' + r.title + '</div>'
+        + '<div class="kpi-pop-title">' + r.title
+          + (r.status==='Acting' ? '<span class="act-tag">ACTING</span>' : '') + '</div>'
         + (r.name && r.name !== 'Vacant' && r.name !== 'nan' && r.name !== ''
-            ? '<div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:2px;">👤 ' + r.name + '</div>'
+            ? (r.status==='Acting'
+                ? '<div style="font-size:12px;color:#7c3aed;font-weight:600;margin-top:2px;">👤 ' + r.name + ' <span style="font-weight:500;color:var(--muted)">— acting incumbent</span></div>'
+                : '<div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:2px;">👤 ' + r.name + '</div>')
             : '')
         + '<div class="kpi-pop-dept">' + r.dept + '</div>'
         + '<div class="kpi-pop-tags">'
@@ -1404,7 +1407,12 @@ function openKpiPopup(elId, event) {
   event.stopPropagation();
   var def = _kpiDefs[elId];
   if (!def) return;
-  var filtered = _kpiRows.filter(def.filter);
+  var _pw = {'1 (Immediate)':1,'2 (Q1)':2,'3 (Q2)':3};
+  var filtered = _kpiRows.filter(def.filter).slice().sort(function(a,b){
+    var d=(_pw[a.priority]||9)-(_pw[b.priority]||9);
+    if(d) return d;
+    return (a.title||'').localeCompare(b.title||'');
+  });
   openPopup(def.title, filtered);
 }
 
