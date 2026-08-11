@@ -52,7 +52,8 @@ select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,1
 .kc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 8px rgba(0,59,74,.06);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .kc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,59,74,.10)}
 .kc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:14px 0 0 14px}
-.kc.ct::before{background:var(--teal)}.kc.cl::before{background:var(--lime)}
+.kc.ct::before{background:var(--teal)}
+.kc.cb::before{background:var(--cobalt)}.kc.cl::before{background:var(--lime)}
 .kc.cr::before{background:var(--red)}.kc.cy::before{background:var(--yellow)}
 .kc.cc::before{background:var(--cobalt)}.kc.cp::before{background:var(--purple)}
 .kc-icon{font-size:18px;margin-bottom:6px}
@@ -499,8 +500,8 @@ body.dark .badge-live i{background:#2dd4c8}
     <div class="kc ct"><div class="kc-icon">📋</div><div class="kc-lbl">Total Positions</div><div class="kc-val" id="c-total" style="color:var(--teal)"></div><div class="kc-foot">All roles in scope</div></div>
     <div class="kc cl"><div class="kc-icon">✅</div><div class="kc-lbl">Filled</div><div class="kc-val" id="c-filled" style="color:#3a8a1a"></div><div class="kc-foot"><div class="prog"><div id="c-fill-bar" class="prog-fill" style="background:linear-gradient(90deg,#5a9e38,#6abf4b)"></div></div><span style="color:#3a8a1a;font-weight:700" id="c-comp2"></span> Completion</div></div>
     <div class="kc cr"><div class="kc-icon">🔴</div><div class="kc-lbl">Vacant</div><div class="kc-val" id="c-vacant" style="color:var(--red)"></div><div class="kc-foot"><div class="prog"><div id="c-vac-bar" class="prog-fill" style="background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div><span style="color:var(--red);font-weight:700" id="c-vacp2"></span> Vacancy Rate</div></div>
-    <div class="kc cp"><div class="kc-icon">⏸️</div><div class="kc-lbl">On Hold</div><div class="kc-val" id="c-hold" style="color:var(--purple)"></div><div class="kc-foot"><div class="prog"><div id="c-hold-bar" class="prog-fill" style="background:linear-gradient(90deg,#d35400,#e67e22)"></div></div><span style="color:var(--purple);font-weight:700" id="c-hold-pct"></span> of total</div></div>
     <div class="kc cy"><div class="kc-icon">⚙️</div><div class="kc-lbl">In Pipeline</div><div class="kc-val" id="c-pipeline" style="color:#a06800"></div><div class="kc-foot">Under Hiring · <span style="color:var(--red);font-weight:700" id="c-p1uh"></span> P1</div></div>
+    <div class="kc cb"><div class="kc-icon">🎯</div><div class="kc-lbl">Hired YTD</div><div class="kc-val" id="c-hired" style="color:var(--cobalt)"></div><div class="kc-foot">Joined since Jan 2026</div></div>
   </div>
   <div class="chief-prow">
     <div class="cpc"><div class="cpc-badge" style="background:rgba(217,48,37,.10);color:var(--red)">P1</div><div><div class="cpc-lbl">Immediate</div><div class="cpc-num" id="cp-p1" style="color:var(--red)"></div><div class="cpc-sub"><span id="cp-p1v" style="color:var(--red);font-weight:700"></span> vacant · <span id="cp-p1u" style="color:#c9870a;font-weight:700"></span> pipeline</div></div></div>
@@ -542,13 +543,12 @@ body.dark .badge-live i{background:#2dd4c8}
     <span id="fcount"></span>
   </div>
   <div class="sec">Executive Summary</div>
-  <div class="kpi6">
+  <div class="kpi5">
     <div class="kc ct"><div class="kc-icon">📋</div><div class="kc-lbl">Total Positions</div><div class="kc-val" id="k-total" style="color:var(--teal)"></div><button class="kpi-info-btn" style="color:var(--teal)" onclick="openKpiPopup('k-total',event)" title="View details">◉</button><div class="kc-foot">All roles in scope</div></div>
     <div class="kc cl"><div class="kc-icon">✅</div><div class="kc-lbl">Filled</div><div class="kc-val" id="k-filled" style="color:#3d8a1e"></div><button class="kpi-info-btn" style="color:#3d8a1e" onclick="openKpiPopup('k-filled',event)" title="View details">◉</button><div class="kc-foot"><div class="prog"><div id="k-fill-bar" class="prog-fill" style="background:linear-gradient(90deg,#5a9e38,#6abf4b)"></div></div><span style="color:#3d8a1e;font-weight:700" id="k-comp-pct"></span> Completion</div></div>
     <div class="kc cr"><div class="kc-icon">🔴</div><div class="kc-lbl">Vacant</div><div class="kc-val" id="k-vacant" style="color:var(--red)"></div><button class="kpi-info-btn" style="color:var(--red)" onclick="openKpiPopup('k-vacant',event)" title="View details">◉</button><div class="kc-foot"><div class="prog"><div id="k-vac-bar" class="prog-fill" style="background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div><span style="color:var(--red);font-weight:700" id="k-vac-pct"></span> Vacancy Rate</div></div>
-    <div class="kc cp"><div class="kc-icon">⏸️</div><div class="kc-lbl">On Hold</div><div class="kc-val" id="k-hold" style="color:var(--purple)"></div><button class="kpi-info-btn" style="color:var(--purple)" onclick="openKpiPopup('k-hold',event)" title="View details">◉</button><div class="kc-foot"><div class="prog"><div id="k-hold-bar" class="prog-fill" style="background:linear-gradient(90deg,#d35400,#e67e22)"></div></div><span style="color:var(--purple);font-weight:700" id="k-hold-pct"></span> of total · <span style="color:var(--red);font-weight:700" id="k-hold-pct-vac"></span> of vacant</div></div>
     <div class="kc cy"><div class="kc-icon">⚙️</div><div class="kc-lbl">In Pipeline</div><div class="kc-val" id="k-pipeline" style="color:#a06800"></div><button class="kpi-info-btn" style="color:#a06800" onclick="openKpiPopup('k-pipeline',event)" title="View details">◉</button><div class="kc-foot">Under Hiring · <span style="color:var(--red);font-weight:700" id="k-p1-uh"></span> P1</div></div>
-    <div class="kc cc"><div class="kc-icon">🎯</div><div class="kc-lbl">Hired YTD</div><div class="kc-val" id="k-hired" style="color:var(--cobalt)"></div><button class="kpi-info-btn" style="color:var(--cobalt)" onclick="openKpiPopup('k-hired',event)" title="View details">◉</button><div class="kc-foot">Joined since Jan 2026</div></div>
+    <div class="kc cb"><div class="kc-icon">🎯</div><div class="kc-lbl">Hired YTD</div><div class="kc-val" id="k-hired" style="color:var(--cobalt)"></div><button class="kpi-info-btn" style="color:var(--cobalt)" onclick="openKpiPopup('k-hired',event)" title="View details">◉</button><div class="kc-foot">Joined since Jan 2026</div></div>
   </div>
   <div class="prow">
     <div class="pc"><div class="pc-badge" style="background:rgba(217,48,37,.10);color:var(--red)">P1</div><div><div class="pc-lbl">Immediate</div><div class="pc-num" id="k-p1" style="color:var(--red)"></div></div></div>
@@ -648,7 +648,7 @@ body.dark .badge-live i{background:#2dd4c8}
     <table class="dur-tbl"><thead><tr>
       <th>Position</th><th>Dept</th><th style="text-align:center">Cluster</th>
       <th style="text-align:center">Eval Date</th><th style="text-align:center">CAMO Date</th>
-      <th style="text-align:center">Days</th><th style="text-align:center">Stage</th>
+      <th style="text-align:center">Joining Date</th><th style="text-align:center">Days</th><th style="text-align:center">Stage</th>
     </tr></thead><tbody id="dur-tbody"></tbody></table>
   </div>
 
@@ -731,12 +731,12 @@ const cbCls  = p => p>=70?'cb-hi':p>=50?'cb-mid':'cb-lo';
 // ── CALC ─────────────────────────────────────────────────────────
 function calc(rows) {
   const t=rows.filter(function(r){return r.status!=='Hold'&&r.status!=='Removed'&&r.status!=='Additional';}).length, c=rows.filter(r=>r.status==='Current/Osool').length,
-    v=rows.filter(function(r){return r.status==='Vacant'||r.status==='Acting';}).length, ho=rows.filter(r=>r.status==='Hold').length,
+    v=rows.filter(function(r){return r.status==='Vacant'||r.status==='Acting';}).length, ho=0,
     uh=rows.filter(r=>r.status==='Under Hiring').length, h=rows.filter(r=>r.status==='Hired').length,
-    p1=rows.filter(r=>r.priority==='1 (Immediate)').length,
-    p2=rows.filter(r=>r.priority==='2 (Q1)').length,
-    p3=rows.filter(r=>r.priority==='3 (Q2)').length,
-    pb=rows.filter(r=>!r.priority).length,
+    p1=rows.filter(r=>r.priority==='1 (Immediate)'&&(r.status==='Vacant'||r.status==='Acting'||r.status==='Under Hiring')).length,
+    p2=rows.filter(r=>r.priority==='2 (Q1)'&&(r.status==='Vacant'||r.status==='Acting'||r.status==='Under Hiring')).length,
+    p3=rows.filter(r=>r.priority==='3 (Q2)'&&(r.status==='Vacant'||r.status==='Acting'||r.status==='Under Hiring')).length,
+    pb=rows.filter(r=>!r.priority&&(r.status==='Vacant'||r.status==='Acting'||r.status==='Under Hiring')).length,
     p1uh=rows.filter(r=>r.status==='Under Hiring'&&r.priority==='1 (Immediate)').length,
     p1v=rows.filter(r=>r.priority==='1 (Immediate)'&&(r.status==='Vacant'||r.status==='Acting')).length,
     filled=rows.filter(function(r){return r.status==='Current/Osool'||r.status==='Hired';}).length, comp=t>0?+(filled/t*100).toFixed(1):0, vacp=t>0?+(v/t*100).toFixed(1):0;
@@ -767,22 +767,23 @@ updateGreeting();
 setInterval(updateGreeting,60000);
 
 // ── DURATION HELPERS ─────────────────────────────────────────────
-function getDuration(evalStr,camoStr){
+function getDuration(evalStr,camoStr,joinStr){
   if(!evalStr) return null;
   const ed = new Date(evalStr);
   if(isNaN(ed.getTime())) return null;
   const today = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Riyadh'}));
   today.setHours(0,0,0,0);
-  if(camoStr){
-    const cd=new Date(camoStr);
-    if(!isNaN(cd.getTime())&&cd>ed)
-      return {days:Math.round((cd-ed)/86400000),stage:'Completed'};
+  // Stage based on Joining Date
+  if(joinStr){
+    const jd=new Date(joinStr);
+    if(!isNaN(jd.getTime())&&jd>ed)
+      return {days:Math.round((jd-ed)/86400000),stage:'Completed'};
   }
   return {days:Math.round((today-ed)/86400000),stage:'In Progress'};
 }
 function buildDurRows(rows){
-  return rows.filter(r=>r.evalDate).map(r=>{
-    const d=getDuration(r.evalDate,r.camoDate);
+  return rows.filter(r=>r.evalDate&&r.status!=='Hired'&&r.status!=='Current/Osool').map(r=>{
+    const d=getDuration(r.evalDate,r.camoDate,r.joiningDate);
     return d?{...r,...d}:null;
   }).filter(Boolean).sort((a,b)=>b.days-a.days);
 }
@@ -822,11 +823,13 @@ function renderChief(rows){
   // Greeting stats
   set('c-comp',s.comp+'%');set('c-vac',s.v);set('c-p1v',s.p1v);set('c-pipe',s.uh);
   // KPIs
-  set('c-total',s.t);set('c-filled',s.filled);set('c-vacant',s.v);set('c-hold',s.ho);set('c-pipeline',s.uh);
+  set('c-total',s.t);set('c-filled',s.filled);set('c-vacant',s.v);set('c-pipeline',s.uh);
+  set('c-hired',s.h);
+  set('c-hired',s.h);
   set('c-comp2',s.comp+'%');set('c-vacp2',s.vacp+'%');
-  const chp=s.t>0?+(s.ho/s.t*100).toFixed(1):0;
-  set('c-hold-pct',chp+'%');
-  const chb=$('c-hold-bar');if(chb)chb.style.width=chp+'%';set('c-p1uh',s.p1uh);
+  
+  
+  const chb=$('c-hold-bar');set('c-p1uh',s.p1uh);
   const cfb=$('c-fill-bar');if(cfb)cfb.style.width=s.comp+'%';
   const cvb=$('c-vac-bar');if(cvb)cvb.style.width=s.vacp+'%';
   set('cp-p1',s.p1);set('cp-p1v',s.p1v);set('cp-p1u',s.p1uh);
@@ -839,7 +842,7 @@ function renderChief(rows){
     chief_bars.innerHTML=depts.map(dept=>{
       const dr=rows.filter(r=>r.dept===dept),t2=dr.length;
       const f=dr.filter(r=>r.status==='Current/Osool'||r.status==='Hired').length;
-      const ho=dr.filter(r=>r.status==='Hold').length;
+      const ho=0;
       const v=dr.filter(r=>r.status==='Vacant'||r.status==='Acting').length;
       const fp=+(f/t2*100).toFixed(0),hp=+(ho/t2*100).toFixed(0),vp=+(v/t2*100).toFixed(0);
       const comp2=+(f/t2*100).toFixed(1);
@@ -896,12 +899,13 @@ function renderChief(rows){
 function renderDetail(rows){
   const s=calc(rows);
   set('k-total',s.t);set('k-filled',s.filled);set('k-vacant',s.v);
-  set('k-hold',s.ho);set('k-pipeline',s.uh);set('k-hired',s.h);
+  set('k-pipeline',s.uh);
+  set('k-hired',s.h);set('k-hired',s.h);
   set('k-p1-uh',s.p1uh);set('k-comp-pct',s.comp+'%');set('k-vac-pct',s.vacp+'%');
-  const khp=s.t>0?+(s.ho/s.t*100).toFixed(1):0;
-  set('k-hold-pct',khp+'%');
-  const khb=$('k-hold-bar');if(khb)khb.style.width=khp+'%';
-  set('k-hold-pct-vac',(s.v>0?+(s.ho/s.v*100).toFixed(1):0)+'%');
+  
+  
+  const khb=$('k-hold-bar');
+  
   const kfb=$('k-fill-bar');if(kfb)kfb.style.width=s.comp+'%';
   const kvb=$('k-vac-bar');if(kvb)kvb.style.width=s.vacp+'%';
   set('k-p1',s.p1);set('k-p2',s.p2);set('k-p3',s.p3);if($('k-blank'))set('k-blank',s.pb);
@@ -985,6 +989,7 @@ function renderAnalytics(rows){
       <td style="text-align:center"><span class="cl-tag">${r.cluster}</span></td>
       <td style="text-align:center;font-size:11px;color:var(--muted);font-family:var(--mono)">${r.evalDate||'—'}</td>
       <td style="text-align:center;font-size:11px;color:var(--muted);font-family:var(--mono)">${r.camoDate||'—'}</td>
+      <td style="text-align:center;font-size:11px;color:${r.joiningDate?'var(--lime)':'var(--muted)'};font-family:var(--mono);font-weight:${r.joiningDate?'700':'400'}">${r.joiningDate||'—'}</td>
       <td style="text-align:center;font-weight:800;font-family:var(--mono);color:${clr}">${r.days}d</td>
       <td style="text-align:center">${tag}</td>
     </tr>`;
