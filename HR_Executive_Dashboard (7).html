@@ -894,7 +894,8 @@ set('c-p1uh',s.p1uh);
       const f=dr.filter(r=>isFilled(r)).length;
       const p=dr.filter(r=>isPipeline(r)).length;
       const v=dr.filter(r=>isVacant(r)).length;
-      const fp=+(f/t2*100).toFixed(0),pp=+(p/t2*100).toFixed(0),vp=+(v/t2*100).toFixed(0);
+      // exact widths — no rounding, so the three segments always total 100%
+      const fp=f/t2*100, pp=p/t2*100, vp=100-fp-pp;
       const comp2=+(f/t2*100).toFixed(1);
       const clr=cbCls(comp2);
       return `<div class="dbar-row">
@@ -905,7 +906,7 @@ set('c-p1uh',s.p1uh);
           <div class="dbar-seg" style="width:${vp}%;background:var(--vac)" title="Vacant: ${v}"></div>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
-          <span class="cb ${clr}" style="font-size:11px;padding:3px 9px">${comp2}%</span>
+          <span class="cb ${clr}" style="font-size:11px;padding:3px 0;width:52px;text-align:center">${comp2}%</span>
           <span style="font-size:11px;color:var(--muted);width:32px;text-align:right">${t2}</span>
         </div>
       </div>`;
