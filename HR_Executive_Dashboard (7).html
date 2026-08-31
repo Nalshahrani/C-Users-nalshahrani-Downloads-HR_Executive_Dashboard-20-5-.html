@@ -944,7 +944,7 @@ set('c-p1uh',s.p1uh);
     const pt=r.priority==='1 (Immediate)'?'p1t':r.priority==='2 (Q1)'?'p2t':r.priority==='3 (Q2)'?'p3t':'pbt';
     const actTag = r.status==='Acting' ? '<span class="act-tag">ACTING</span>' : '';
     const who = r.candidate ? '<span style="color:var(--teal);font-weight:600">'+r.candidate+'</span>'
-              : (r.status==='Acting'&&r.name ? '<span style="color:#7c3aed">'+r.name+'</span>' : '—');
+              : (r.status==='Acting'&&r.name ? '<span style="color:#7c3aed;font-weight:600">'+r.name+'</span>' : '—');
     return `<tr>
       <td style="font-weight:600;font-size:12px">${r.title}${actTag}</td>
       <td style="font-size:11px;color:var(--muted)">${SH[r.dept]||r.dept}</td>
@@ -1001,7 +1001,7 @@ function renderDetail(rows){
     const pt=r.priority==='1 (Immediate)'?'p1t':r.priority==='2 (Q1)'?'p2t':r.priority==='3 (Q2)'?'p3t':'pbt';
     const actTag = r.status==='Acting' ? '<span class="act-tag">ACTING</span>' : '';
     const who = r.candidate ? '<span style="color:var(--teal);font-weight:600">'+r.candidate+'</span>'
-              : (r.status==='Acting'&&r.name ? '<span style="color:#7c3aed">'+r.name+'</span>' : '—');
+              : (r.status==='Acting'&&r.name ? '<span style="color:#7c3aed;font-weight:600">'+r.name+'</span>' : '—');
     return `<tr><td style="color:var(--muted);font-family:var(--mono)">${i+1}</td><td style="font-weight:600;font-size:12px">${r.title}${actTag}</td><td style="font-size:11px;color:var(--muted)">${r.dept}</td><td><span class="cl-tag">${r.cluster}</span></td><td><span class="${pt}">${r.priority||'—'}</span></td><td style="font-size:11px">${who}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.evalDate||'—'}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.camoDate||'—'}</td><td style="font-size:11px;font-family:var(--mono);color:${r.joiningDate?'var(--teal2)':'var(--muted)'};font-weight:${r.joiningDate?'700':'400'}">${r.joiningDate||'—'}</td></tr>`;
   }).join('');
 }
