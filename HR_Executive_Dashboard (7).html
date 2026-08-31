@@ -547,7 +547,7 @@ body.dark .badge-live i{background:#2dd4c8}
   </div>
   <div class="panel" style="margin-bottom:20px">
     <div class="ptitle"><span class="dot" style="background:var(--cyan)"></span>Active Hiring Pipeline — <span id="chief-pipe-count" style="color:var(--teal)"></span> positions<button class="help-btn" onclick="openHelp('pipeline')" title="What is this?">?</button></div>
-    <div style="overflow-x:auto"><table class="chief-pipe"><thead><tr><th>Position</th><th>Department</th><th>Cluster</th><th>Priority</th><th>Candidate</th><th>Eval. Date</th></tr></thead><tbody id="chief-pipe-tbody"></tbody></table></div>
+    <div style="overflow-x:auto"><table class="chief-pipe"><thead><tr><th>Position</th><th>Department</th><th>Cluster</th><th>Priority</th><th>Candidate</th><th>Eval. Date</th><th>Joining Date</th></tr></thead><tbody id="chief-pipe-tbody"></tbody></table></div>
   </div>
 </div>
 </div>
@@ -585,7 +585,7 @@ body.dark .badge-live i{background:#2dd4c8}
     </div>
   <div class="sec">Active Hiring Pipeline — <span id="pipe-count"></span> Positions</div>
   <div class="panel" style="margin-bottom:28px;overflow-x:auto">
-    <table class="ptbl"><thead><tr><th>#</th><th>Position Title</th><th>Department</th><th>Cluster</th><th>Priority</th><th>Candidate</th><th>Eval. Date</th><th>CAMO Date</th></tr></thead><tbody id="pipe-tbody"></tbody></table>
+    <table class="ptbl"><thead><tr><th>#</th><th>Position Title</th><th>Department</th><th>Cluster</th><th>Priority</th><th>Candidate</th><th>Eval. Date</th><th>CAMO Date</th><th>Joining Date</th></tr></thead><tbody id="pipe-tbody"></tbody></table>
   </div>
   <div class="sec">Cluster Completion Overview</div>
   <div class="panel" style="margin-bottom:28px">
@@ -952,6 +952,7 @@ set('c-p1uh',s.p1uh);
       <td><span class="${pt}">${r.priority||'—'}</span></td>
       <td style="font-size:11px">${who}</td>
       <td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.evalDate||'—'}</td>
+      <td style="font-size:11px;font-family:var(--mono);color:${r.joiningDate?'var(--teal2)':'var(--muted)'};font-weight:${r.joiningDate?'700':'400'}">${r.joiningDate||'—'}</td>
     </tr>`;
   }).join('');
 }
@@ -1001,7 +1002,7 @@ function renderDetail(rows){
     const actTag = r.status==='Acting' ? '<span class="act-tag">ACTING</span>' : '';
     const who = r.candidate ? '<span style="color:var(--teal);font-weight:600">'+r.candidate+'</span>'
               : (r.status==='Acting'&&r.name ? '<span style="color:#7c3aed">'+r.name+'</span>' : '—');
-    return `<tr><td style="color:var(--muted);font-family:var(--mono)">${i+1}</td><td style="font-weight:600;font-size:12px">${r.title}${actTag}</td><td style="font-size:11px;color:var(--muted)">${r.dept}</td><td><span class="cl-tag">${r.cluster}</span></td><td><span class="${pt}">${r.priority||'—'}</span></td><td style="font-size:11px">${who}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.evalDate||'—'}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.camoDate||'—'}</td></tr>`;
+    return `<tr><td style="color:var(--muted);font-family:var(--mono)">${i+1}</td><td style="font-weight:600;font-size:12px">${r.title}${actTag}</td><td style="font-size:11px;color:var(--muted)">${r.dept}</td><td><span class="cl-tag">${r.cluster}</span></td><td><span class="${pt}">${r.priority||'—'}</span></td><td style="font-size:11px">${who}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.evalDate||'—'}</td><td style="font-size:11px;color:var(--muted);font-family:var(--mono)">${r.camoDate||'—'}</td><td style="font-size:11px;font-family:var(--mono);color:${r.joiningDate?'var(--teal2)':'var(--muted)'};font-weight:${r.joiningDate?'700':'400'}">${r.joiningDate||'—'}</td></tr>`;
   }).join('');
 }
 
